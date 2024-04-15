@@ -1,5 +1,6 @@
 package com.eriksencosta.math.common
 
+import java.math.BigDecimal
 import java.math.RoundingMode
 import java.util.Objects.hash
 import kotlin.experimental.ExperimentalTypeInference
@@ -87,6 +88,16 @@ public sealed class Rounding : Comparable<Rounding> {
     public fun round(block: () -> Float): Float = round(block())
 
     /**
+     * Rounds the value returned by the function [block].
+     *
+     * @param[block] A function block.
+     * @return A rounded value.
+     */
+    @OptIn(ExperimentalTypeInference::class)
+    @OverloadResolutionByLambdaReturnType
+    public fun round(block: () -> BigDecimal): BigDecimal = round(block())
+
+    /**
      * Rounds the given value.
      *
      * @param[value] A value.
@@ -102,6 +113,14 @@ public sealed class Rounding : Comparable<Rounding> {
      */
     public abstract fun round(value: Float): Float
 
+    /**
+     * Rounds the given value.
+     *
+     * @param[value] A value.
+     * @return A rounded value.
+     */
+    public abstract fun round(value: BigDecimal): BigDecimal
+
     override fun compareTo(other: Rounding): Int = precision.compareTo(other.precision)
 
     override fun equals(other: Any?): Boolean = this === other ||
@@ -116,6 +135,7 @@ public sealed class Rounding : Comparable<Rounding> {
 public object NoRounding : Rounding() {
     override fun round(value: Double): Double = value
     override fun round(value: Float): Float = value
+    override fun round(value: BigDecimal): BigDecimal = value
     override fun toString(): String = "NoRounding"
 }
 
@@ -124,7 +144,8 @@ public object NoRounding : Rounding() {
  */
 public class PreciseRounding internal constructor(override val precision: Int, override val mode: RoundingMode) :
     Rounding() {
-    override fun round(value: Double): Double = value.toBigDecimal().setScale(precision, mode).toDouble()
-    override fun round(value: Float): Float = value.toBigDecimal().setScale(precision, mode).toFloat()
+    override fun round(value: Double): Double = round(value.toBigDecimal()).toDouble()
+    override fun round(value: Float): Float = round(value.toBigDecimal()).toFloat()
+    override fun round(value: BigDecimal): BigDecimal = value.setScale(precision, mode)
     override fun toString(): String = "PreciseRounding[%d %s]".format(precision, mode)
 }

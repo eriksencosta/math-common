@@ -1,5 +1,6 @@
 package com.eriksencosta.math.common
 
+import java.math.BigDecimal
 import java.math.RoundingMode
 import kotlin.test.Test
 import kotlin.test.assertEquals
@@ -20,26 +21,42 @@ class RoundingTest {
     fun `Do not round a value`() {
         assertEquals(5.55, noRounding.round { 5.55 })
         assertEquals(5.55f, noRounding.round { 5.55f })
+        assertEquals(BigDecimal("5.55"), noRounding.round { BigDecimal("5.55") })
     }
 
     @Test
     fun `Round a value to decimal places`() {
         assertEquals(5.6, roundingUp.round { 5.55 })
         assertEquals(5.6f, roundingUp.round { 5.55f })
+        assertEquals(BigDecimal("5.6"), roundingUp.round { BigDecimal("5.55") })
+
         assertEquals(5.5, roundingDown.round { 5.55 })
         assertEquals(5.5f, roundingDown.round { 5.55f })
+        assertEquals(BigDecimal("5.5"), roundingDown.round { BigDecimal("5.55") })
+
         assertEquals(5.6, 5.55.round(1))
         assertEquals(5.6f, 5.55f.round(1))
+        assertEquals(BigDecimal("5.6"), BigDecimal("5.55").round(1))
+
         assertEquals(5.6, { 5.55 }.round(1))
         assertEquals(5.6f, { 5.55f }.round(1))
+        assertEquals(BigDecimal("5.6"), { BigDecimal("5.55") }.round(1))
+
         assertEquals(5.6, 5.55.round(roundingUp))
         assertEquals(5.6f, 5.55f.round(roundingUp))
+        assertEquals(BigDecimal("5.6"), BigDecimal("5.55").round(roundingUp))
+
         assertEquals(5.6, { 5.55 }.round(roundingUp))
         assertEquals(5.6f, { 5.55f }.round(roundingUp))
+        assertEquals(BigDecimal("5.6"), { BigDecimal("5.55") }.round(roundingUp))
+
         assertEquals(5.5, 5.55.round(roundingDown))
         assertEquals(5.5f, 5.55f.round(roundingDown))
+        assertEquals(BigDecimal("5.5"), BigDecimal("5.55").round(roundingDown))
+
         assertEquals(5.5, { 5.55 }.round(roundingDown))
         assertEquals(5.5f, { 5.55f }.round(roundingDown))
+        assertEquals(BigDecimal("5.5"), { BigDecimal("5.55") }.round(roundingDown))
     }
 
     @Test
