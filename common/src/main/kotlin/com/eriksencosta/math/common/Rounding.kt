@@ -46,7 +46,7 @@ public sealed class Rounding : Comparable<Rounding> {
          *
          * @return A [NoRounding] object.
          */
-        public fun no(): NoRounding = NoRounding()
+        public fun no(): NoRounding = NoRounding
 
         /**
          * Creates a `PreciseRounding` instance.
@@ -113,7 +113,7 @@ public sealed class Rounding : Comparable<Rounding> {
 /**
  * Strategy that does not round a value.
  */
-public class NoRounding internal constructor() : Rounding() {
+public object NoRounding : Rounding() {
     override fun round(value: Double): Double = value
     override fun round(value: Float): Float = value
     override fun toString(): String = "NoRounding"

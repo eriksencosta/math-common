@@ -4,11 +4,17 @@ import java.math.RoundingMode
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertNotEquals
+import kotlin.test.assertSame
 
 class RoundingTest {
     private val roundingUp = Rounding.to(1)
     private val roundingDown = Rounding.to(1, RoundingMode.HALF_DOWN)
     private val noRounding = Rounding.no()
+
+    @Test
+    fun `Create a single object`() {
+        assertSame(Rounding.no(), Rounding.no())
+    }
 
     @Test
     fun `Do not round a value`() {
@@ -60,6 +66,7 @@ class RoundingTest {
         assertEquals(rounding1, rounding2)
         assertNotEquals(rounding1, rounding3)
         assertNotEquals(rounding1, rounding4)
+        assertEquals(Rounding.no(), Rounding.no())
     }
 
     @Test
