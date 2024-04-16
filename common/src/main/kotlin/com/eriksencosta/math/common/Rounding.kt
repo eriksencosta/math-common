@@ -41,25 +41,6 @@ public sealed class Rounding : Comparable<Rounding> {
      */
     public open val mode: RoundingMode = RoundingMode.HALF_UP
 
-    public companion object {
-        /**
-         * Creates a `NoRounding` instance.
-         *
-         * @return A [NoRounding] object.
-         */
-        public fun no(): NoRounding = NoRounding
-
-        /**
-         * Creates a `PreciseRounding` instance.
-         *
-         * @param[precision] The precision scale to round a value.
-         * @param[mode] The rounding mode policy to round the number.
-         * @return A [PreciseRounding] object.
-         */
-        public fun to(precision: Int, mode: RoundingMode = RoundingMode.HALF_UP): PreciseRounding =
-            PreciseRounding(precision, mode)
-    }
-
     /**
      * Returns a new `Rounding` with the given precision, keeping the current rounding [mode].
      *
@@ -127,6 +108,25 @@ public sealed class Rounding : Comparable<Rounding> {
         other is Rounding && precision == other.precision && mode == other.mode
 
     override fun hashCode(): Int = hash(precision, mode.ordinal)
+
+    public companion object {
+        /**
+         * Creates a `NoRounding` instance.
+         *
+         * @return A [NoRounding] object.
+         */
+        public fun no(): NoRounding = NoRounding
+
+        /**
+         * Creates a `PreciseRounding` instance.
+         *
+         * @param[precision] The precision scale to round a value.
+         * @param[mode] The rounding mode policy to round the number.
+         * @return A [PreciseRounding] object.
+         */
+        public fun to(precision: Int, mode: RoundingMode = RoundingMode.HALF_UP): PreciseRounding =
+            PreciseRounding(precision, mode)
+    }
 }
 
 /**
