@@ -39,7 +39,7 @@ public sealed class Rounding : Comparable<Rounding> {
     /**
      * The rounding mode used to round the decimal value.
      */
-    public open val mode: RoundingMode = RoundingMode.HALF_UP
+    public open val mode: RoundingMode = defaultRoundingMode
 
     /**
      * Returns a new `Rounding` with the given precision, keeping the current rounding [mode].
@@ -48,7 +48,7 @@ public sealed class Rounding : Comparable<Rounding> {
      * @return A [Rounding] object.
      */
     public infix fun with(precision: Int): Rounding =
-        if (this.precision == precision && this.mode == RoundingMode.HALF_UP) this else to(precision, mode)
+        if (this.precision == precision && this.mode == defaultRoundingMode) this else to(precision, mode)
 
     /**
      * Rounds the value returned by the function [block].
@@ -110,6 +110,8 @@ public sealed class Rounding : Comparable<Rounding> {
     override fun hashCode(): Int = hash(precision, mode.ordinal)
 
     public companion object {
+        private val defaultRoundingMode: RoundingMode = RoundingMode.HALF_EVEN
+
         /**
          * Creates a `NoRounding` instance.
          *
@@ -124,7 +126,7 @@ public sealed class Rounding : Comparable<Rounding> {
          * @param[mode] The rounding mode policy to round the number.
          * @return A [PreciseRounding] object.
          */
-        public fun to(precision: Int, mode: RoundingMode = RoundingMode.HALF_UP): PreciseRounding =
+        public fun to(precision: Int, mode: RoundingMode = defaultRoundingMode): PreciseRounding =
             PreciseRounding(precision, mode)
     }
 }
@@ -142,8 +144,10 @@ public object NoRounding : Rounding() {
 /**
  * Strategy to round a value precisely.
  */
-public class PreciseRounding internal constructor(override val precision: Int, override val mode: RoundingMode) :
-    Rounding() {
+public class PreciseRounding internal constructor(
+    override val precision: Int,
+    override val mode: RoundingMode
+) : Rounding() {
     override fun round(value: Double): Double = round(value.toBigDecimal()).toDouble()
     override fun round(value: Float): Float = round(value.toBigDecimal()).toFloat()
     override fun round(value: BigDecimal): BigDecimal = value.setScale(precision, mode)

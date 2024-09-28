@@ -40,7 +40,7 @@ easier:
 1.25.round(1) // 1.3
 ```
 
-By default, the [RoundingMode.HALF_UP](https://docs.oracle.com/javase/8/docs/api/java/math/RoundingMode.html#HALF_UP) is
+By default, the [RoundingMode.HALF_EVEN](https://docs.oracle.com/javase/8/docs/api/java/math/RoundingMode.html#HALF_EVEN) is
 used for rounding (it is the rounding logic commonly taught at school). If you want to use a different mode, create a
 `Rounding` and use it:
 

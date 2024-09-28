@@ -3,7 +3,7 @@
 package com.eriksencosta.math.common
 
 /**
- * Rounds the float value to a given precision scale using [java.math.RoundingMode.HALF_UP] rounding mode.
+ * Rounds the float value to a given precision scale using [java.math.RoundingMode.HALF_EVEN] rounding mode.
  *
  * @receiver Float
  * @param[scale] The scale to round a value.
@@ -21,7 +21,7 @@ public infix fun Float.round(scale: Int): Float = Rounding.to(scale).round(this)
 public infix fun Float.round(rounding: Rounding): Float = rounding.round(this)
 
 /**
- * Rounds the double value to a given precision scale using [java.math.RoundingMode.HALF_UP] rounding mode.
+ * Rounds the double value to a given precision scale using [java.math.RoundingMode.HALF_EVEN] rounding mode.
  *
  * @receiver (() -> Float)
  * @param[scale] The scale to round a value.

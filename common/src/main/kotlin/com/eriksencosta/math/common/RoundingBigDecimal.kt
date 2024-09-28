@@ -5,7 +5,7 @@ package com.eriksencosta.math.common
 import java.math.BigDecimal
 
 /**
- * Rounds the BigDecimal to a given precision scale using [java.math.RoundingMode.HALF_UP] rounding mode.
+ * Rounds the BigDecimal to a given precision scale using [java.math.RoundingMode.HALF_EVEN] rounding mode.
  *
  * @receiver BigDecimal
  * @param[scale] The scale to round a value.
@@ -23,7 +23,7 @@ public infix fun BigDecimal.round(scale: Int): BigDecimal = Rounding.to(scale).r
 public infix fun BigDecimal.round(rounding: Rounding): BigDecimal = rounding.round(this)
 
 /**
- * Rounds the BigDecimal to a given precision scale using [java.math.RoundingMode.HALF_UP] rounding mode.
+ * Rounds the BigDecimal to a given precision scale using [java.math.RoundingMode.HALF_EVEN] rounding mode.
  *
  * @receiver (() -> BigDecimal)
  * @param[scale] The scale to round a value.

@@ -4,12 +4,13 @@ import java.math.BigDecimal
 import java.math.RoundingMode
 import kotlin.test.Test
 import kotlin.test.assertEquals
+import kotlin.test.assertFalse
 import kotlin.test.assertNotEquals
 import kotlin.test.assertSame
 
 class RoundingTest {
-    private val roundingUp = Rounding.to(1)
-    private val roundingDown = Rounding.to(1, RoundingMode.HALF_DOWN)
+    private val roundingHalfEven = Rounding.to(1)
+    private val roundingHalfDown = Rounding.to(1, RoundingMode.HALF_DOWN)
     private val noRounding = Rounding.no()
 
     @Test
@@ -26,13 +27,13 @@ class RoundingTest {
 
     @Test
     fun `Round a value to decimal places`() {
-        assertEquals(5.6, roundingUp.round { 5.55 })
-        assertEquals(5.6f, roundingUp.round { 5.55f })
-        assertEquals(BigDecimal("5.6"), roundingUp.round { BigDecimal("5.55") })
+        assertEquals(5.6, roundingHalfEven.round { 5.55 })
+        assertEquals(5.6f, roundingHalfEven.round { 5.55f })
+        assertEquals(BigDecimal("5.6"), roundingHalfEven.round { BigDecimal("5.55") })
 
-        assertEquals(5.5, roundingDown.round { 5.55 })
-        assertEquals(5.5f, roundingDown.round { 5.55f })
-        assertEquals(BigDecimal("5.5"), roundingDown.round { BigDecimal("5.55") })
+        assertEquals(5.5, roundingHalfDown.round { 5.55 })
+        assertEquals(5.5f, roundingHalfDown.round { 5.55f })
+        assertEquals(BigDecimal("5.5"), roundingHalfDown.round { BigDecimal("5.55") })
 
         assertEquals(5.6, 5.55.round(1))
         assertEquals(5.6f, 5.55f.round(1))
@@ -42,21 +43,21 @@ class RoundingTest {
         assertEquals(5.6f, { 5.55f }.round(1))
         assertEquals(BigDecimal("5.6"), { BigDecimal("5.55") }.round(1))
 
-        assertEquals(5.6, 5.55.round(roundingUp))
-        assertEquals(5.6f, 5.55f.round(roundingUp))
-        assertEquals(BigDecimal("5.6"), BigDecimal("5.55").round(roundingUp))
+        assertEquals(5.6, 5.55.round(roundingHalfEven))
+        assertEquals(5.6f, 5.55f.round(roundingHalfEven))
+        assertEquals(BigDecimal("5.6"), BigDecimal("5.55").round(roundingHalfEven))
 
-        assertEquals(5.6, { 5.55 }.round(roundingUp))
-        assertEquals(5.6f, { 5.55f }.round(roundingUp))
-        assertEquals(BigDecimal("5.6"), { BigDecimal("5.55") }.round(roundingUp))
+        assertEquals(5.6, { 5.55 }.round(roundingHalfEven))
+        assertEquals(5.6f, { 5.55f }.round(roundingHalfEven))
+        assertEquals(BigDecimal("5.6"), { BigDecimal("5.55") }.round(roundingHalfEven))
 
-        assertEquals(5.5, 5.55.round(roundingDown))
-        assertEquals(5.5f, 5.55f.round(roundingDown))
-        assertEquals(BigDecimal("5.5"), BigDecimal("5.55").round(roundingDown))
+        assertEquals(5.5, 5.55.round(roundingHalfDown))
+        assertEquals(5.5f, 5.55f.round(roundingHalfDown))
+        assertEquals(BigDecimal("5.5"), BigDecimal("5.55").round(roundingHalfDown))
 
-        assertEquals(5.5, { 5.55 }.round(roundingDown))
-        assertEquals(5.5f, { 5.55f }.round(roundingDown))
-        assertEquals(BigDecimal("5.5"), { BigDecimal("5.55") }.round(roundingDown))
+        assertEquals(5.5, { 5.55 }.round(roundingHalfDown))
+        assertEquals(5.5f, { 5.55f }.round(roundingHalfDown))
+        assertEquals(BigDecimal("5.5"), { BigDecimal("5.55") }.round(roundingHalfDown))
     }
 
     @Test
@@ -109,13 +110,13 @@ class RoundingTest {
 
     @Test
     fun `Calculate the hashCode`() {
-        assertEquals(996, roundingUp.hashCode())
-        assertEquals(997, roundingDown.hashCode())
+        assertEquals(998, roundingHalfEven.hashCode())
+        assertEquals(997, roundingHalfDown.hashCode())
     }
 
     @Test
     fun `Convert to string`() {
         assertEquals("NoRounding", Rounding.no().toString())
-        assertEquals("PreciseRounding[2 HALF_UP]", Rounding.to(2).toString())
+        assertEquals("PreciseRounding[2 HALF_EVEN]", Rounding.to(2).toString())
     }
 }

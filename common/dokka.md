@@ -14,7 +14,7 @@ Math conventions to reduce boilerplate code. Useful for rounding values:
     1.257.round(rounding) // 1.25
     1.253.round(rounding) // 1.25
 
-You can also just pass the number of desired decimal places to round, in which case [HALF_UP][java.math.RoundingMode]
+You can also just pass the number of desired decimal places to round, in which case [HALF_EVEN][java.math.RoundingMode]
 is used as the rounding mode:
 
     1.257.round(2) // 1.26
