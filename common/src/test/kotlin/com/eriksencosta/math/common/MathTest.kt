@@ -1,5 +1,6 @@
 package com.eriksencosta.math.common
 
+import java.math.BigDecimal
 import kotlin.test.Test
 import kotlin.test.assertEquals
 
@@ -10,6 +11,7 @@ class MathTest {
         assertEquals(4.0f, 2.0f.squared())
         assertEquals(4L, 2L.squared())
         assertEquals(4, 2.squared())
+        assertEquals(BigDecimal("4"), BigDecimal("2").squared())
     }
 
     @Test
@@ -18,5 +20,6 @@ class MathTest {
         assertEquals(8.0f, 2.0f.cubed())
         assertEquals(8L, 2L.cubed())
         assertEquals(8, 2.cubed())
+        assertEquals(BigDecimal("8"), BigDecimal("2").cubed())
     }
 }

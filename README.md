@@ -73,8 +73,7 @@ Alternatively:
 
 ### Exponentiation
 
-The extension functions `squared` and `cubed` are available for simple math operations with `Double`, `Float`, `Long`,
-and `Int`:
+The extension functions `squared` and `cubed` are available for `BigDecimal`, `Double`, `Float`, `Long`, and `Int`:
 
 ```kotlin
 2.squared() // 4

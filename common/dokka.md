@@ -28,16 +28,13 @@ method:
 
     { 3.14159 * 10.0.squared() }.round(2) // 314.16
 
-## Exponentiation
 
-The extension functions [squared][com.eriksencosta.math.common.squared] and [cubed][com.eriksencosta.math.common.cubed]
-are available for simple math operations with [Double][kotlin.Double], [Float][kotlin.Float], [Long][kotlin.Long], and 
-[Int][kotlin.Int]:
+## Installation and documentation
 
-```kotlin
-2.squared() // 4
-2.0.cubed() // 8.0
-```
+The [installation procedures](https://github.com/eriksencosta/math-common#installation) and the
+[how-to-use](https://github.com/eriksencosta/math-common#usage) documentation can be read in the
+[project repository on GitHub](https://github.com/eriksencosta/math-common).
+
 
 # Package com.eriksencosta.math.common
 

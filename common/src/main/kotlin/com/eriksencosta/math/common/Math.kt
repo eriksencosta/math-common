@@ -3,9 +3,15 @@
 
 package com.eriksencosta.math.common
 
+import java.math.BigDecimal
 import kotlin.math.pow
 import kotlin.math.roundToInt
 import kotlin.math.roundToLong
+
+/**
+ * Returns the square of the number.
+ */
+public fun BigDecimal.squared(): BigDecimal = this.pow(2)
 
 /**
  * Returns the square of the number.
@@ -26,6 +32,11 @@ public fun Long.squared(): Long = this.toFloat().pow(2).roundToLong()
  * Returns the square of the number.
  */
 public fun Int.squared(): Int = this.toFloat().pow(2).roundToInt()
+
+/**
+ * Returns the cube of the number.
+ */
+public fun BigDecimal.cubed(): BigDecimal = this.pow(3)
 
 /**
  * Returns the cube of the number.
