@@ -1,4 +1,4 @@
-@file:JvmName("RoundingFloat")
+@file:JvmName("Float")
 
 package com.eriksencosta.math.common
 

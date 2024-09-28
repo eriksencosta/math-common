@@ -1,4 +1,4 @@
-@file:JvmName("RoundingDouble")
+@file:JvmName("Double")
 
 package com.eriksencosta.math.common
 

@@ -1,4 +1,4 @@
-@file:JvmName("RoundingBigDecimal")
+@file:JvmName("BigDecimal")
 
 package com.eriksencosta.math.common
 
