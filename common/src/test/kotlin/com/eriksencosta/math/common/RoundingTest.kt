@@ -15,11 +15,6 @@ class RoundingTest {
     private val noRounding = Rounding.no()
 
     @Test
-    fun `Create a single object`() {
-        assertSame(Rounding.no(), Rounding.no())
-    }
-
-    @Test
     fun `Do not round a value`() {
         assertEquals(5.55, noRounding.round { 5.55 })
         assertEquals(5.55f, noRounding.round { 5.55f })
@@ -85,17 +80,32 @@ class RoundingTest {
         }
 
     @Test
-    fun `Compare for equality`() {
+    fun `Check for equality`() {
         val rounding1 = Rounding.to(2)
         val rounding2 = Rounding.to(2)
-        val rounding3 = Rounding.to(2, RoundingMode.FLOOR)
-        val rounding4 = Rounding.to(4)
+        val rounding3 = PreciseRounding(2, RoundingMode.HALF_EVEN)
+        val rounding4 = Rounding.to(2, RoundingMode.FLOOR)
+        val rounding5 = PreciseRounding(4, RoundingMode.HALF_EVEN)
+        val rounding6 = Rounding.to(Int.MAX_VALUE)
+        val rounding7 = Rounding.no()
+        val rounding8 = Rounding.no()
+        val rounding9 = NoRounding
 
-        assertEquals(rounding1, rounding1)
-        assertEquals(rounding1, rounding2)
-        assertNotEquals(rounding1, rounding3)
-        assertNotEquals(rounding1, rounding4)
-        assertEquals(Rounding.no(), Rounding.no())
+        assertEquals(rounding1, rounding1, "Same instance")
+        assertEquals(rounding1, rounding2, "Same values")
+        assertEquals(rounding1, rounding3, "Same values")
+        assertNotEquals(rounding1, rounding4, "Different values: mode")
+        assertNotEquals(rounding1, rounding5, "Different values: precision")
+        assertNotEquals<Rounding>(rounding6, rounding7, "Different Rounding subclass")
+
+        // NoRounding is a singleton.
+        assertSame(rounding7, rounding8, "Same instance")
+        assertSame(rounding7, rounding9, "Same instance")
+
+        // Coverage cases.
+        @Suppress("EqualsNullCall")
+        assertFalse(rounding1.equals(null), "Different types: null")
+        assertFalse(rounding1.equals(""), "Different types: string")
     }
 
     @Test

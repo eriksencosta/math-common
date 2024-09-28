@@ -104,8 +104,10 @@ public sealed class Rounding : Comparable<Rounding> {
 
     override fun compareTo(other: Rounding): Int = precision.compareTo(other.precision)
 
-    override fun equals(other: Any?): Boolean = this === other ||
-        other is Rounding && precision == other.precision && mode == other.mode
+    override fun equals(other: Any?): Boolean = (other as Rounding).let {
+        precision == it.precision &&
+            mode == it.mode
+    }
 
     override fun hashCode(): Int = hash(precision, mode.ordinal)
 
@@ -155,5 +157,7 @@ public class PreciseRounding internal constructor(
     override fun round(value: Double): Double = round(value.toBigDecimal()).toDouble()
     override fun round(value: Float): Float = round(value.toBigDecimal()).toFloat()
     override fun round(value: BigDecimal): BigDecimal = value.setScale(precision, mode)
+    override fun equals(other: Any?): Boolean = other is PreciseRounding && super.equals(other)
+    override fun hashCode(): Int = super.hashCode()
     override fun toString(): String = "PreciseRounding[%d %s]".format(precision, mode)
 }
