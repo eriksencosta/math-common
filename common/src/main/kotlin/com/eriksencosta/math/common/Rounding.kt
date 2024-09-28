@@ -111,7 +111,10 @@ public sealed class Rounding : Comparable<Rounding> {
 
     override fun hashCode(): Int = hash(precision, mode.ordinal)
 
-    public companion object {
+    /**
+     * A [Rounding] factory.
+     */
+    public companion object Factory {
         private val defaultRoundingMode: RoundingMode = RoundingMode.HALF_EVEN
 
         /**
