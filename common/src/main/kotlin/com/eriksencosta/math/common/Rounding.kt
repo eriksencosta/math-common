@@ -42,7 +42,7 @@ public sealed class Rounding : Comparable<Rounding> {
     public open val mode: RoundingMode = defaultRoundingMode
 
     /**
-     * Returns a new `Rounding` with the given precision, keeping the current rounding [mode].
+     * Returns a new [Rounding] with the given precision, keeping the current rounding [mode].
      *
      * @param[precision] The precision scale to round a value.
      * @return A [Rounding] object.
@@ -118,14 +118,14 @@ public sealed class Rounding : Comparable<Rounding> {
         private val defaultRoundingMode: RoundingMode = RoundingMode.HALF_EVEN
 
         /**
-         * Creates a `NoRounding` instance.
+         * Creates a [NoRounding] instance.
          *
          * @return A [NoRounding] object.
          */
         public fun no(): NoRounding = NoRounding
 
         /**
-         * Creates a `PreciseRounding` instance.
+         * Creates a [PreciseRounding] instance.
          *
          * @param[precision] The precision scale to round a value.
          * @param[mode] The rounding mode policy to round the number.
