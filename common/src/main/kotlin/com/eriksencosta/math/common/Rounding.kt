@@ -47,8 +47,8 @@ public sealed class Rounding : Comparable<Rounding> {
      * @param[precision] The precision scale to round a value.
      * @return A [Rounding] object.
      */
-    public infix fun with(precision: Int): Rounding =
-        if (this.precision == precision && this.mode == defaultRoundingMode) this else to(precision, mode)
+    public open infix fun with(precision: Int): Rounding = if (this.precision == precision)
+        this else to(precision, mode)
 
     /**
      * Rounds the value returned by the function [block].
@@ -135,6 +135,10 @@ public sealed class Rounding : Comparable<Rounding> {
  * Strategy that does not round a value.
  */
 public object NoRounding : Rounding() {
+    override fun with(precision: Int): Rounding = throw UnsupportedOperationException(
+        "Can not convert a NoRounding to a PreciseRounding. If you need rounding support, create a new object by " +
+            "calling Rounding.to() method"
+    )
     override fun round(value: Double): Double = value
     override fun round(value: Float): Float = value
     override fun round(value: BigDecimal): BigDecimal = value

@@ -1,5 +1,6 @@
 package com.eriksencosta.math.common
 
+import org.junit.jupiter.api.assertThrows
 import java.math.BigDecimal
 import java.math.RoundingMode
 import kotlin.test.Test
@@ -70,8 +71,18 @@ class RoundingTest {
     @Test
     fun `Rescale the Rounding`() {
         assertEquals(Rounding.to(4, RoundingMode.FLOOR), Rounding.to(2, RoundingMode.FLOOR).with(4))
+        assertEquals(Rounding.to(2), Rounding.to(4).with(2))
         assertEquals(Rounding.to(2), Rounding.to(2).with(2))
     }
+
+    @Test
+    fun `Throw exception when rescaling a NoRounding`() =
+        assertThrows<UnsupportedOperationException> { Rounding.no().with(2) }.run {
+            val expected = "Can not convert a NoRounding to a PreciseRounding. If you need rounding support, create " +
+                "a new object by calling Rounding.to() method"
+
+            assertEquals(expected, message)
+        }
 
     @Test
     fun `Compare for equality`() {
