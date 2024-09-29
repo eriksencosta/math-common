@@ -1,5 +1,6 @@
 [versions]
 kotlin-stdlib = { require = "[1.9,2.0[" }
+caffeine = { require = "[2.9,3.0[" }
 detekt = { require = "[1.23.5,2.0[" }
 junit-jupiter-engine = { require = "[5.10,6.0[" }
 junit-platform-launcher = { require = "[1.10,2.0[" }
@@ -8,6 +9,7 @@ sonatype-central-upload = { require = "[1.0.3,2.0[" }
 [libraries]
 kotlin-stdlib = { module = "org.jetbrains.kotlin:kotlin-stdlib", version.ref = "kotlin-stdlib" }
 kotlin-test-junit5 = { module = "org.jetbrains.kotlin:kotlin-test-junit5", version.ref = "kotlin-stdlib" }
+caffeine = { module = "com.github.ben-manes.caffeine:caffeine", version.ref = "caffeine" }
 detekt-formatting = { module = "io.gitlab.arturbosch.detekt:detekt-formatting", version.ref = "detekt" }
 detekt-libraries = { module = "io.gitlab.arturbosch.detekt:detekt-rules-libraries", version.ref = "detekt" }
 junit-jupiter-engine = { module = "org.junit.jupiter:junit-jupiter-engine", version.ref = "junit-jupiter-engine" }
