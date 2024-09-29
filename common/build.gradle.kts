@@ -27,6 +27,8 @@ repositories {
 }
 
 dependencies {
+    implementation(libs.caffeine)
+
     testImplementation(libs.kotlin.test.junit5)
     testImplementation(libs.junit.jupiter.engine)
     testRuntimeOnly(libs.junit.platform.launcher)
