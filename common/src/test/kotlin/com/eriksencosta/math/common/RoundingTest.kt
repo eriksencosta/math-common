@@ -7,6 +7,7 @@ import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFalse
 import kotlin.test.assertNotEquals
+import kotlin.test.assertNotSame
 import kotlin.test.assertSame
 
 class RoundingTest {
@@ -101,6 +102,10 @@ class RoundingTest {
         // NoRounding is a singleton.
         assertSame(rounding7, rounding8, "Same instance")
         assertSame(rounding7, rounding9, "Same instance")
+
+        // The library caches the PreciseRounding objects.
+        assertSame(rounding1, rounding2)
+        assertNotSame(rounding1, rounding3)
 
         // Coverage cases.
         @Suppress("EqualsNullCall")

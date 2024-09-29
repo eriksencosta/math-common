@@ -1,5 +1,10 @@
 package com.eriksencosta.math.common
 
+import com.eriksencosta.math.common.caching.Cache
+import com.eriksencosta.math.common.caching.CacheConfig
+import com.eriksencosta.math.common.caching.DefaultCache
+import com.eriksencosta.math.common.caching.NoCache
+import com.eriksencosta.math.common.caching.createCache
 import java.math.BigDecimal
 import java.math.RoundingMode
 import java.util.Objects.hash
@@ -117,6 +122,15 @@ public sealed class Rounding : Comparable<Rounding> {
     public companion object Factory {
         private val defaultRoundingMode: RoundingMode = RoundingMode.HALF_EVEN
 
+        private var cache: Cache<Rounding> = createDefaultCache()
+            set(custom) = synchronized(this) {
+                field = when {
+                    custom is DefaultCache -> custom
+                    field is DefaultCache && !field.isInitialized() -> custom
+                    else -> error("The factory cache can't be replaced once it is configured or initialized")
+                }
+            }
+
         /**
          * Creates a [NoRounding] instance.
          *
@@ -132,7 +146,35 @@ public sealed class Rounding : Comparable<Rounding> {
          * @return A [PreciseRounding] object.
          */
         public fun to(precision: Int, mode: RoundingMode = defaultRoundingMode): PreciseRounding =
-            PreciseRounding(precision, mode)
+            cachedRounding("$precision-$mode") {
+                PreciseRounding(precision, mode)
+            }
+
+        /**
+         * Configures the [Factory] cache. The method must be called before the cache is initialized (i.e., before any
+         * call to the [to] method) and should be called once.
+         *
+         * @param[config] A configuration block to set up the cache.
+         * @throws[IllegalStateException] When the cache was previously initialized or configured.
+         */
+        internal fun configureCache(config: CacheConfig.() -> Unit) { cache = createCache(config) }
+
+        /**
+         * Disables the [Factory] cache. The method must be called before the cache is initialized (i.e., before any
+         * call to the [to] method) and should be called once.
+         *
+         * @throws[IllegalStateException] When the cache was previously initialized or configured.
+         */
+        internal fun disableCache() { cache = NoCache() }
+
+        internal fun resetCache() = cache.clean().also {
+            cache = createDefaultCache()
+        }
+
+        private fun createDefaultCache(): Cache<Rounding> = DefaultCache(createCache())
+
+        @Suppress("UNCHECKED_CAST")
+        private fun <T : Rounding> cachedRounding(key: String, block: () -> T): T = cache.get(key, block) as T
     }
 }
 
