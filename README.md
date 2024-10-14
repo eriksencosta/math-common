@@ -29,6 +29,8 @@ If you're using Maven, add to your POM xml file:
 </dependency>
 ```
 
+Math Common is not compatible with the Android SDK at the moment.
+
 ## Usage
 
 ### Rounding
@@ -79,7 +81,6 @@ The extension functions `squared` and `cubed` are available for `BigDecimal`, `D
 2.squared() // 4
 2.0.cubed() // 8.0
 ```
-
 
 ## Performance
 
