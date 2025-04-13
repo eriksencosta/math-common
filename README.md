@@ -1,7 +1,7 @@
 # Math Common
 
-![Codacy grade](https://img.shields.io/codacy/grade/78b28d3fdf8f4a869b2222b623eb0ed0)
-![Codacy coverage](https://img.shields.io/codacy/coverage/78b28d3fdf8f4a869b2222b623eb0ed0)
+[![Codacy grade](https://img.shields.io/codacy/grade/78b28d3fdf8f4a869b2222b623eb0ed0)](https://app.codacy.com/gh/eriksencosta/math-common/dashboard)
+[![Codacy coverage](https://img.shields.io/codacy/coverage/78b28d3fdf8f4a869b2222b623eb0ed0)](https://app.codacy.com/gh/eriksencosta/math-common/coverage)
 
 Math conventions to reduce boilerplate code.
 
