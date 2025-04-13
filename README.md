@@ -29,8 +29,6 @@ If you're using Maven, add to your POM xml file:
 </dependency>
 ```
 
-Math Common is not compatible with the Android SDK at the moment.
-
 ## Usage
 
 ### Rounding
@@ -80,28 +78,6 @@ The extension functions `squared` and `cubed` are available for `BigDecimal`, `D
 ```kotlin
 2.squared() // 4
 2.0.cubed() // 8.0
-```
-
-## Performance
-
-The library caches the `Rounding` objects by default. You can configure the cache by calling `configureCache()`:
-
-```kotlin
-configureCache {
-    maximumItems = 100
-    expirationTime = 2
-    expirationTimeUnit = TimeUnit.HOURS
-}
-
-Rounding.to(2) === Rounding.to(2) // true
-```
-
-The previous example will configure the cache to store up to 100 `Rounding` objects, and a cached object will live for up to two hours. If you want to disable the cache, call `disableCache()`:
-
-```kotlin
-disableCache()
-
-Rounding.to(2) === Rounding.to(2) // false
 ```
 
 ## API documentation
