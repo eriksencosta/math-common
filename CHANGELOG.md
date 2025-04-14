@@ -12,6 +12,20 @@ Breaking changes are highlighted with the [BC] prefix.
 The 0.x version may have breaking changes (as foreseen in the Semantic Versioning Specification). Nevertheless, efforts
 will be taken to minimize this kind of change.
 
+## 0.3.0 (2025-04-14)
+
+### Added
+
+* Support for Android development
+
+### Removed
+
+* [BC] Caching layer
+  * The library used [Caffeine](https://github.com/ben-manes/caffeine) to cache some of its cache objects. However,
+    Caffeine [breaks on Android](https://github.com/ben-manes/caffeine/issues/959). This change only breaks if you
+    are configuring or disabling the cache through the `configureCache()` or `disableCache()` calls
+
+
 ## 0.2.0 (2024-10-05)
 
 ### Added
